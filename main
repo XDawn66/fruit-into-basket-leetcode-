@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+
+int totalFruit(vector<int>& fruits) {
+  
+  int answ[fruits.size()];
+  int max = 0;
+  int currentmax = 0;
+  int start_index = 0;
+  int type_of_fruit = 0;
+  
+  for(int i = 0; i < fruits.size(); i++)
+    {
+        if(answ[fruits[i]] == 0) //we know it is a new type
+        {
+          type_of_fruit++;
+        }
+        answ[fruits[i]]++;
+        currentmax++;
+        while(type_of_fruit > 2 && start_index < i)
+          {
+              answ[fruits[start_index]]--;
+              currentmax--;
+              if(answ[fruits[start_index]] == 0)
+              {
+                 type_of_fruit--;
+              }
+            start_index++;
+          }
+          
+          if(max < currentmax)
+          {
+            max = currentmax;
+          }
+          
+    }
+  
+  
+  return max;
+}
+
+
+int main() {
+  vector<int> fruits;
+  fruits.push_back(4);
+  fruits.push_back(3);
+ fruits.push_back(3);
+  fruits.push_back(2);
+  fruits.push_back(1);
+  fruits.push_back(2);
+  fruits.push_back(2);
+  fruits.push_back(1);
+  fruits.push_back(3);
+  fruits.push_back(3);
+  fruits.push_back(3);
+   cout<<totalFruit(fruits);
+}
